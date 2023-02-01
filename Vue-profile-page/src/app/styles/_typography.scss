@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+
+$manropeFont: "Manrope", sans-serif;
+
+@mixin heading-one-styles {
+  font-family: $manropeFont;
+
+  font-size: 4rem;
+  font-weight: bolder;
+  line-height: 40px;
+
+  @include MIN_1200 {
+    font-size: 5rem;
+  }
+}
+
+@mixin heading-two-styles {
+  font-family: $manropeFont;
+
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 32px;
+
+  @include MIN_1200 {
+    font-size: 2.8rem;
+  }
+}
+
+@mixin heading-three-styles {
+  font-family: $manropeFont;
+
+  font-size: 1.6rem;
+  font-weight: bold;
+  line-height: 20px;
+
+  @include MIN_1200 {
+    font-size: 1.8rem;
+  }
+}
+
+@mixin subtitle-one-styles {
+  font-family: $manropeFont;
+
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 20px;
+
+  @include MIN_1200 {
+    font-size: 1.8rem;
+  }
+}
+
+@mixin subtitle-two-styles {
+  font-family: $manropeFont;
+
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 20px;
+
+  @include MIN_1200 {
+    font-size: 1.6rem;
+  }
+}
+
+@mixin body-one-styles {
+  font-family: $manropeFont;
+
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 20px;
+
+  @include MIN_1200 {
+    font-size: 1.6rem;
+  }
+}
+
+@mixin footnote-one-styles {
+  font-family: $manropeFont;
+
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 16px;
+
+  @include MIN_1200 {
+    font-size: 1.4rem;
+  }
+}
+
+@mixin caption-one-styles {
+  font-family: $manropeFont;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 16px;
+
+  @include MIN_1200 {
+    font-size: 1.4rem;
+  }
+}
