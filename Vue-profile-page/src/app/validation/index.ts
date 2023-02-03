@@ -18,7 +18,7 @@ defineRule("fullName", (value: string) => {
 
 defineRule("required", (value: string) => {
   if (!value || !value.length) {
-    return "Поле не заполнено";
+    return "Поле не может быть пустым";
   }
   return true;
 });

@@ -9,6 +9,7 @@
         as="select"
         class="input-group__phone-code"
         v-model="phoneCode"
+        @change="inputValue = ''"
       >
         <option v-for="(option, index) in options" :key="index" :value="option">
           {{ option }}

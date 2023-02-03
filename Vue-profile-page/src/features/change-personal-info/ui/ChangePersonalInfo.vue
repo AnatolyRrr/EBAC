@@ -44,7 +44,11 @@
       rules=""
     />
 
-    <AppMultiselect />
+    <AppMultiselect
+      title="Владение языками"
+      :options="languages"
+      :initialValues="[1, 4]"
+    />
 
     <BaseButton type="submit">Сохранить</BaseButton>
 
@@ -59,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { useForm } from "vee-validate";
 import { BaseButton, InputGroup, AppAlert, AppMultiselect } from "@/shared";
 
@@ -68,6 +72,37 @@ export type ChangePersonalInfoFormValue = {};
 const { handleSubmit } = useForm<ChangePersonalInfoFormValue>();
 
 const isOpenAlert = ref(false);
+
+const languages = reactive([
+  {
+    value: 1,
+    name: "Английский",
+  },
+  {
+    value: 2,
+    name: "Китайский",
+  },
+  {
+    value: 3,
+    name: "Японский",
+  },
+  {
+    value: 4,
+    name: "Португальский",
+  },
+  {
+    value: 5,
+    name: "Русский",
+  },
+  {
+    value: 6,
+    name: "Казахский",
+  },
+  {
+    value: 7,
+    name: "Французский",
+  },
+]);
 
 const showAlert = () => {
   isOpenAlert.value = true;
