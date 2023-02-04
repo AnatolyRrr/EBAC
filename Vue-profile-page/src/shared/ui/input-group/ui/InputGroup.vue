@@ -17,7 +17,7 @@
       </Field>
 
       <Field
-        :type="type"
+        :type="type === 'password' ? passwordInputType : type"
         :name="name"
         :id="id"
         :maxlength="maxLength"
@@ -25,6 +25,14 @@
         :placeholder="placeholder"
         :rules="rules"
         class="input-group__input"
+      />
+
+      <EyeIcon
+        v-if="type === 'password'"
+        :color="passwordInputType === 'text' ? colors.Main.Primary : colors.Base.GreyBlue"
+        @mousedown="passwordInputType = 'text'"
+        @mouseup="passwordInputType = 'password'"
+        class="input-group__eye-icon"
       />
     </div>
 
@@ -36,6 +44,8 @@
 import { ref, watch } from "vue";
 import { useMask } from "@/shared/lib/composables/useMask";
 import { Field, ErrorMessage } from "vee-validate";
+import EyeIcon from "@/app/icons/EyeIcon.vue";
+import { colors } from "@/app/styles";
 
 export type InputGroupProps = {
   title: string;
@@ -55,7 +65,7 @@ const mask = useMask();
 
 const inputValue = ref(props.initialValue ? props.initialValue : "");
 const phoneCode = ref(props.codeCountry ? props.codeCountry : "+55");
-
+const passwordInputType = ref('password');
 const options = ref(["+7", "+55", "+996"]);
 
 watch(inputValue, () => {
@@ -82,6 +92,7 @@ watch(inputValue, () => {
   .input-wrapper {
     width: 100%;
     display: flex;
+    position: relative;
   }
 
   &__phone-code {
@@ -109,6 +120,14 @@ watch(inputValue, () => {
   &__error {
     @include footnote-one-styles;
     color: $status-error;
+  }
+
+  &__eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
   }
 }
 </style>
