@@ -71,12 +71,12 @@ h5 {
 }
 
 .card-layout {
+  width: 100%;
   height: max-content;
   background: $base-white;
   padding: 12px;
   box-shadow: 0 12px 16px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
-  width: 100%;
 
   @include MIN_768 {
     padding: 16px;
