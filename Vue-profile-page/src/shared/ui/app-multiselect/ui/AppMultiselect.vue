@@ -75,6 +75,7 @@ export type OptionType = {
 
 export type MultiselectProps = {
   title: string;
+  name: string;
   required?: boolean;
   initialValues?: SelectedValueType;
   options: OptionType[];
@@ -92,7 +93,7 @@ onMounted(() => {
   }
 });
 
-const { value: formValue, errorMessage } = useField("languages", () => {
+const { value: formValue, errorMessage } = useField(props.name, () => {
   if (props.required && selectedValues.length === 0) {
     return "Поле не может быть пустым";
   }
@@ -263,7 +264,7 @@ const filteredOptions = computed(() => {
       padding: 6px 12px;
 
       &:hover {
-        background: $main-primary;
+        background: $base-spanish-viridian;
         color: $base-white;
       }
 

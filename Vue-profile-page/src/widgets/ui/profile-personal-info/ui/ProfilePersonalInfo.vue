@@ -2,7 +2,7 @@
   <section class="personal-info">
     <form class="card-layout form" @submit="onSubmit">
       <h3 class="form__title">Персональная информация</h3>
-  
+
       <InputGroup
         title="ФИО"
         name="username"
@@ -10,7 +10,7 @@
         type="text"
         rules="required|fullName"
       />
-  
+
       <InputGroup
         title="Дата рождения"
         name="birthday"
@@ -18,7 +18,7 @@
         type="date"
         rules="date"
       />
-  
+
       <InputGroup
         title="E-mail"
         name="email"
@@ -27,7 +27,7 @@
         placeholder="example@gmail.com"
         rules="required|email"
       />
-  
+
       <InputGroup
         title="Город"
         name="city"
@@ -36,7 +36,7 @@
         placeholder=""
         rules=""
       />
-  
+
       <InputGroup
         title="Номер телефона"
         name="phone"
@@ -44,15 +44,16 @@
         type="tel"
         rules=""
       />
-  
+
       <AppMultiselect
         title="Владение языками"
+        name="languages"
         :options="languages"
         :initialValues="[1, 4]"
       />
-  
+
       <BaseButton type="submit">Сохранить</BaseButton>
-  
+
       <AppAlert
         :isOpen="isOpenAlert"
         status="success"
@@ -69,9 +70,16 @@ import { ref, reactive } from "vue";
 import { useForm } from "vee-validate";
 import { BaseButton, InputGroup, AppAlert, AppMultiselect } from "@/shared/ui";
 
-export type ChangePersonalInfoFormValue = {};
+export type ChangePersonalInfoFormValues = {
+  username: string;
+  birthday: Date;
+  email: string;
+  city: string;
+  phone: string;
+  languages: (string | number)[];
+};
 
-const { handleSubmit } = useForm<ChangePersonalInfoFormValue>();
+const { handleSubmit } = useForm<ChangePersonalInfoFormValues>();
 
 const isOpenAlert = ref(false);
 

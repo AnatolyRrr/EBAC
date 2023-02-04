@@ -45,13 +45,13 @@ import { ref } from "vue";
 import { useForm } from "vee-validate";
 import { BaseButton, InputGroup, AppAlert } from "@/shared/ui";
 
-export type ChangePasswordFormValue = {
+export type ChangePasswordFormValues = {
   currentPassword: string;
   newPassword: string;
   confirmPassword: string;
 };
 
-const { handleSubmit } = useForm<ChangePasswordFormValue>();
+const { handleSubmit } = useForm<ChangePasswordFormValues>();
 
 const isOpenAlert = ref(false);
 

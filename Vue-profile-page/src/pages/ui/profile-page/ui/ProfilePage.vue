@@ -2,6 +2,8 @@
   <div class="wrapper">
     <div class="container">
       <main class="container__fill card-layout profile-page">
+        <ChangeAvatar />
+
         <ProfilePersonalInfo />
 
         <ChangePassword />
@@ -12,7 +14,7 @@
 
 <script setup lang="ts">
 import { ProfilePersonalInfo } from "@/widgets/ui";
-import { ChangePassword } from "@/features/ui";
+import { ChangePassword, ChangeAvatar } from "@/features/ui";
 </script>
 
 <style scoped lang="scss">
