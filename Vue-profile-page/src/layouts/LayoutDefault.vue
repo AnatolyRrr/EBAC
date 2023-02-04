@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { TheHeader, TheFooter } from "@/widgets";
+import { TheHeader, TheFooter } from "@/widgets/ui";
 </script>
 
 <style scoped lang="scss">

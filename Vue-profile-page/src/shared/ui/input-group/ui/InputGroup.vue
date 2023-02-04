@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { useMask } from "@/app/composables/useMask";
+import { useMask } from "@/shared/lib/composables/useMask";
 import { Field, ErrorMessage } from "vee-validate";
 
 export type InputGroupProps = {

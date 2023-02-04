@@ -1,8 +1,9 @@
 <template>
   <div class="wrapper">
     <div class="container">
-      <main class="container__fill card-layout profile-detail" @submit="onSubmit">
-        <ChangePersonalInfo />
+      <main class="container__fill card-layout profile-page">
+        <ProfilePersonalInfo />
+
         <ChangePassword />
       </main>
     </div>
@@ -10,7 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { ChangePassword, ChangePersonalInfo } from '@/features';
+import { ProfilePersonalInfo } from "@/widgets/ui";
+import { ChangePassword } from "@/features/ui";
 </script>
 
 <style scoped lang="scss">
@@ -23,7 +25,7 @@ import { ChangePassword, ChangePersonalInfo } from '@/features';
   }
 }
 
-.profile-detail {
+.profile-page {
   margin: 12px 0;
   display: grid;
   grid-template-columns: 1fr;
