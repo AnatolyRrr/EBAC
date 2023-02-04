@@ -29,7 +29,11 @@
 
       <EyeIcon
         v-if="type === 'password'"
-        :color="passwordInputType === 'text' ? colors.Main.Primary : colors.Base.GreyBlue"
+        :color="
+          passwordInputType === 'text'
+            ? colors.Main.Primary
+            : colors.Base.GreyBlue
+        "
         @mousedown="passwordInputType = 'text'"
         @mouseup="passwordInputType = 'password'"
         class="input-group__eye-icon"
@@ -65,7 +69,7 @@ const mask = useMask();
 
 const inputValue = ref(props.initialValue ? props.initialValue : "");
 const phoneCode = ref(props.codeCountry ? props.codeCountry : "+55");
-const passwordInputType = ref('password');
+const passwordInputType = ref("password");
 const options = ref(["+7", "+55", "+996"]);
 
 watch(inputValue, () => {
