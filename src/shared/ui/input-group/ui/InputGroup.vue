@@ -36,6 +36,8 @@
         "
         @mousedown="passwordInputType = 'text'"
         @mouseup="passwordInputType = 'password'"
+        @touchstart="passwordInputType = 'text'"
+        @touchend="passwordInputType = 'password'"
         class="input-group__eye-icon"
       />
     </div>
