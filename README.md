@@ -1,4 +1,4 @@
-# Vue-profile-page
+# Vue3-profile-page
 
 The stack is Vue3, TypeScript, Vee-validate and SCSS.
 
