@@ -12,6 +12,7 @@
         name="avatar"
         id="avatar"
         class="avatar__change__input"
+        ref="avatarInput"
         @change="onSaveAvatarChange($event)"
       />
     </label>
@@ -37,7 +38,7 @@ const isError = ref(false);
 const alertMessage = ref("");
 const avatarImageUrl = ref("/AvatarMock.png");
 const timeoutId = ref();
-
+const avatarInput = ref();
 const allowedValues = ref(["jpg", "png"]);
 
 const onSaveAvatarChange = (event: any) => {
@@ -66,6 +67,8 @@ const onRemoveAvatarClick = () => {
   isError.value = false;
   alertMessage.value = "Аватар удален";
   avatarImageUrl.value = "/AvatarMock.png";
+  avatarInput.value.value = "";
+  
 
   showAlert();
 };
