@@ -28,9 +28,11 @@ export const useAlertsStore = defineStore("alerts", () => {
       text: payload.text,
     });
 
+    const id = lastID.value;
+
     if (!payload.critical) {
       setTimeout(() => {
-        removeAlert(lastID.value);
+        removeAlert(id);
       }, payload.timeout ?? 3000);
     }
   };

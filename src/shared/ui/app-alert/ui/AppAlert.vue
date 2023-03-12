@@ -91,7 +91,7 @@ const { alerts, removeAlert } = useAlertsStore();
 .alert-enter-from,
 .alert-leave-to {
   opacity: 0;
-  transform: translateY(-100%);
+  transform: translateX(30px);
 }
 
 .alert-leave-active {
