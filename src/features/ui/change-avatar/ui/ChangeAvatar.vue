@@ -18,36 +18,29 @@
     </label>
 
     <BaseButton @click="onRemoveAvatarClick">Удалить аватар</BaseButton>
-
-    <AppAlert
-      :isOpen="isOpenAlert"
-      :status="isError ? 'error' : 'success'"
-      @close="isOpenAlert = false"
-    >
-      {{ alertMessage }}
-    </AppAlert>
   </section>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { AppAlert, BaseButton } from "@/shared/ui";
+import { useAlertsStore } from "@/stores/alerts";
+import { BaseButton } from "@/shared/ui";
 
-const isOpenAlert = ref(false);
-const isError = ref(false);
-const alertMessage = ref("");
+const { addAlert } = useAlertsStore();
+
 const avatarImageUrl = ref("/AvatarMock.png");
-const timeoutId = ref();
 const avatarInput = ref();
 const allowedValues = ref(["jpg", "png"]);
 
 const onSaveAvatarChange = (event: any) => {
-  isError.value = false;
   const format = event.target.value.slice(-3).toLowerCase();
 
   if (!allowedValues.value.includes(format) && format !== "peg") {
-    isError.value = true;
-    alertMessage.value = "Можно выбрать только файл изображения";
+    addAlert({
+      status: "danger",
+      title: "Ошибка!",
+      text: "Можно выбрать только файл изображения",
+    });
   } else {
     const reader = new FileReader();
 
@@ -57,30 +50,23 @@ const onSaveAvatarChange = (event: any) => {
       avatarImageUrl.value = e.target.result;
     };
 
-    alertMessage.value = "Аватар сохранен";
+    addAlert({
+      status: "success",
+      title: "Успешно!",
+      text: "Аватар сохранен",
+    });
   }
-
-  showAlert();
 };
 
 const onRemoveAvatarClick = () => {
-  isError.value = false;
-  alertMessage.value = "Аватар удален";
   avatarImageUrl.value = "/AvatarMock.png";
   avatarInput.value.value = "";
   
-
-  showAlert();
-};
-
-const showAlert = () => {
-  clearInterval(timeoutId.value);
-
-  isOpenAlert.value = true;
-
-  timeoutId.value = setTimeout(() => {
-    isOpenAlert.value = false;
-  }, 2000);
+  addAlert({
+    status: "success",
+    title: "Успешно!",
+    text: "Аватар удален",
+  });
 };
 </script>
 

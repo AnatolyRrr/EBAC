@@ -53,22 +53,15 @@
       />
 
       <BaseButton type="submit">Сохранить</BaseButton>
-
-      <AppAlert
-        :isOpen="isOpenAlert"
-        status="success"
-        @close="isOpenAlert = false"
-      >
-        Изменения сохранены
-      </AppAlert>
     </form>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
+import { useAlertsStore } from "@/stores/alerts";
 import { useForm } from "vee-validate";
-import { BaseButton, InputGroup, AppAlert, AppMultiselect } from "@/shared/ui";
+import { BaseButton, InputGroup, AppMultiselect } from "@/shared/ui";
 
 export type ChangePersonalInfoFormValues = {
   username: string;
@@ -79,9 +72,9 @@ export type ChangePersonalInfoFormValues = {
   languages: (string | number)[];
 };
 
-const { handleSubmit } = useForm<ChangePersonalInfoFormValues>();
+const { addAlert } = useAlertsStore();
 
-const isOpenAlert = ref(false);
+const { handleSubmit } = useForm<ChangePersonalInfoFormValues>();
 
 const languages = reactive([
   {
@@ -114,16 +107,13 @@ const languages = reactive([
   },
 ]);
 
-const showAlert = () => {
-  isOpenAlert.value = true;
-
-  setTimeout(() => {
-    isOpenAlert.value = false;
-  }, 2000);
-};
-
 const onSubmit = handleSubmit((value) => {
   console.log(value);
-  showAlert();
+
+  addAlert({
+    status: "success",
+    title: "Успешно!",
+    text: "Изменения сохранены",
+  });
 });
 </script>

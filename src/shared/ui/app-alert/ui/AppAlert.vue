@@ -1,35 +1,36 @@
 <template>
   <Teleport to="body">
-    <Transition name="alert">
-      <div v-if="isOpen" class="wrapper">
-        <div class="container">
-          <div class="container__fill alert" :class="status">
-            <h4 class="alert__content">
-              <slot />
-            </h4>
+    <div class="container">
+      <TransitionGroup name="alert" tag="div" class="alerts container__fill">
+        <div
+          v-for="alert in alerts"
+          :key="alert.id"
+          class="alerts__item"
+          :class="'alerts__item_' + alert.status"
+        >
+          <p class="alerts__item__title">{{ alert.title }}</p>
 
-            <CloseIcon @click="$emit('close')" class="alert__close-btn" />
-          </div>
+          <p class="alerts__item__text">{{ alert.text }}</p>
+
+          <CloseIcon
+            class="alerts__item__close-btn"
+            @click="removeAlert(alert.id)"
+          />
         </div>
-      </div>
-    </Transition>
+      </TransitionGroup>
+    </div>
   </Teleport>
 </template>
 
 <script setup lang="ts">
+import { useAlertsStore } from "@/stores/alerts";
 import CloseIcon from "@/app/icons/CloseIcon.vue";
 
-export type AlertProps = {
-  status: "error" | "success";
-  isOpen: boolean;
-};
-
-defineProps<AlertProps>();
-defineEmits(["close"]);
+const { alerts, removeAlert } = useAlertsStore();
 </script>
 
 <style scoped lang="scss">
-.wrapper {
+.container {
   position: fixed;
   top: 40px;
   left: 0;
@@ -46,38 +47,42 @@ defineEmits(["close"]);
     grid-column: 4 / span 6;
   }
 }
-.alert {
-  width: 100%;
-  height: 50px;
-  color: $base-white;
+
+.alerts {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
+  flex-direction: column-reverse;
+  gap: 8px;
   position: relative;
 
-  &__close-btn {
-    position: absolute;
-    right: 12px;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    cursor: pointer;
+  &__item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: $base-white;
+    border-radius: 5px;
 
-    @include MIN_1200 {
-      right: 16px;
+    &_success {
+      background: $status-access;
+    }
+
+    &_danger {
+      background: $status-error;
+    }
+
+    &__title {
+      @include subtitle-two-styles;
+      margin-right: 8px;
+    }
+
+    &__close-btn {
+      margin-left: auto;
+      cursor: pointer;
     }
   }
 }
 
-.success {
-  background: $status-access;
-}
-
-.error {
-  background: $status-error;
-}
-
+.alert-move,
 .alert-enter-active,
 .alert-leave-active {
   transition: all 0.5s ease;
@@ -86,6 +91,10 @@ defineEmits(["close"]);
 .alert-enter-from,
 .alert-leave-to {
   opacity: 0;
-  transform: translate3d(0px, -100%, 0px);
+  transform: translateY(-100%);
+}
+
+.alert-leave-active {
+  position: absolute;
 }
 </style>

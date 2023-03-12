@@ -2,7 +2,7 @@
   <section class="change-password">
     <form class="card-layout form" @submit="onSubmit">
       <h3 class="form__title">Изменение пароля</h3>
-  
+
       <InputGroup
         title="Текущий пароль"
         name="currentPassword"
@@ -10,7 +10,7 @@
         type="password"
         rules="required"
       />
-  
+
       <InputGroup
         title="Новый пароль"
         name="newPassword"
@@ -18,7 +18,7 @@
         type="password"
         rules="required|unconfirmed:currentPassword"
       />
-  
+
       <InputGroup
         title="Подтверждение пароля"
         name="confirmPassword"
@@ -26,24 +26,16 @@
         type="password"
         rules="required|confirmed:newPassword"
       />
-  
+
       <BaseButton type="submit">Сохранить</BaseButton>
-  
-      <AppAlert
-        :isOpen="isOpenAlert"
-        status="success"
-        @close="isOpenAlert = false"
-      >
-        Пароль сохранен
-      </AppAlert>
     </form>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { useForm } from "vee-validate";
-import { BaseButton, InputGroup, AppAlert } from "@/shared/ui";
+import { useAlertsStore } from "@/stores/alerts";
+import { BaseButton, InputGroup } from "@/shared/ui";
 
 export type ChangePasswordFormValues = {
   currentPassword: string;
@@ -51,20 +43,17 @@ export type ChangePasswordFormValues = {
   confirmPassword: string;
 };
 
+const { addAlert } = useAlertsStore();
+
 const { handleSubmit } = useForm<ChangePasswordFormValues>();
-
-const isOpenAlert = ref(false);
-
-const showAlert = () => {
-  isOpenAlert.value = true;
-
-  setTimeout(() => {
-    isOpenAlert.value = false;
-  }, 2000);
-};
 
 const onSubmit = handleSubmit((value) => {
   console.log(value);
-  showAlert();
+
+  addAlert({
+    status: "success",
+    title: "Успешно!",
+    text: "Пароль изменен",
+  });
 });
 </script>
