@@ -1,17 +1,14 @@
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 
-export type Alert = {
+export interface Alert {
   id: number;
   status: "danger" | "success";
   title: string;
   text: string;
 }
 
-export interface IPayload {
-  status: "danger" | "success";
-  title: string;
-  text: string;
+export interface IPayload extends Omit<Alert, 'id'> {
   timeout?: number;
   critical?: boolean;
 }
